@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "coffeechats77f2db51": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
