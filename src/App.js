@@ -158,11 +158,11 @@ class App extends React.Component {
         <h1>OMSCS Coffee Chats</h1>
         <div style={{ margin: "auto"}}>
   	    <form>
-  	      <label>Name:  </label>
+  	      <label>Name*:  </label>
   	      <input type="text" id="name" placeholder={this.state.name}/>
   	      <br />
   	      <br />
-  	      <label>Email:  </label>
+  	      <label>Email*:  </label>
   	      <input type="text" id="email" placeholder={this.state.email}/>
   	      <br />
   	      <br />
@@ -180,7 +180,7 @@ class App extends React.Component {
           <br />    
           <label>Current Courses:  </label>
           <input type="text" id="current_courses" placeholder={this.state.current_courses}/>
-          <br />
+          <div><i>List the course numbers as comma-separated values. For example: "CS 6460, CS 7637"</i></div>
           <br />   
           <label>Job Title:  </label>
           <input type="text" id="job_title" placeholder={this.state.job_title}/>
@@ -192,11 +192,13 @@ class App extends React.Component {
           <br />           
           <label>Interests:  </label>
           <input type="text" id="interests" placeholder={this.state.interests}/>
+          <div><i>List your interests as comma-separated values.</i></div>
+          <p><i>* = required</i></p>
           <br />
           <br />     
 
           <div style={{width: "500px", margin: "auto"}}>
-          <label>Would you like to opt-in to be randomly matched with other OMSCS students for 15 minute calls every 2 weeks? </label>
+          <label>Would you like to opt-in to be randomly matched with other OMSCS students for 15-30 minute calls every 2 weeks? </label>
           <br />
           <input type="radio" id="random_yes" name="random" value="random_yes" checked={"random_yes" === this.state.random} onChange={() => this.updateRandomSelection("random_yes")} />
           <label for="random_yes">Yes</label>
@@ -235,9 +237,9 @@ class App extends React.Component {
   	    </form>
   	    <br />
   	    <br />
-  	    <div style={{width: "500px", margin: "auto"}}>
-  	      "This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information."
-  	    </div>
+  	    <div style={{width: "500px", margin: "auto"}}><i>
+  	      This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information.
+  	    </i></div>
         </div>
       </div>
     );
