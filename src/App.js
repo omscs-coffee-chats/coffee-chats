@@ -34,7 +34,7 @@ class App extends React.Component {
             company : data.Item.Company,
             interests : data.Item.Interests,
             random : data.Item.Random,
-            contact : data.Item.Contact
+            contact : data.Item.Contact,
           });
         })
         .catch((error) => console.log('Error while fetching:', error));
@@ -118,6 +118,18 @@ class App extends React.Component {
 	    });
   }
 
+  loadHome() {
+    this.setState({view: 1});
+  }
+
+  loadEditProfile() {
+    this.setState({view: 2});
+  }
+
+  loadMatch() {
+    this.setState({view: 3});
+  }
+
   updateRandomSelection(selection_in) {
     this.setState({random: selection_in});
   }
@@ -141,7 +153,8 @@ class App extends React.Component {
       company : null,
       interests : null,
       random: null,
-      contact: null
+      contact: null,
+      view: 1
     };
   }
 
@@ -150,99 +163,141 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <div style={{width: "50px"}}>
-        	<AmplifySignOut />
-        </div>
-        <h1>OMSCS Coffee Chats</h1>
-        <div style={{ margin: "auto"}}>
-  	    <form>
-  	      <label>Name*:  </label>
-  	      <input type="text" id="name" placeholder={this.state.name}/>
-  	      <br />
-  	      <br />
-  	      <label>Email*:  </label>
-  	      <input type="text" id="email" placeholder={this.state.email}/>
-  	      <br />
-  	      <br />
-          <label>City:  </label>
-          <input type="text" id="city" placeholder={this.state.city}/>
-          <br />
-          <br />  
-          <label>State:  </label>
-          <input type="text" id="state" placeholder={this.state.state}/>
-          <br />
-          <br />    
-          <label>Country:  </label>
-          <input type="text" id="country" placeholder={this.state.country}/>
-          <br />
-          <br />    
-          <label>Current Courses:  </label>
-          <input type="text" id="current_courses" placeholder={this.state.current_courses}/>
-          <div><i>List the course numbers as comma-separated values. For example: "CS 6460, CS 7637"</i></div>
-          <br />   
-          <label>Job Title:  </label>
-          <input type="text" id="job_title" placeholder={this.state.job_title}/>
-          <br />
-          <br />    
-          <label>Company:  </label>
-          <input type="text" id="company" placeholder={this.state.company}/>
-          <br />
-          <br />           
-          <label>Interests:  </label>
-          <input type="text" id="interests" placeholder={this.state.interests}/>
-          <div><i>List your interests as comma-separated values.</i></div>
-          <p><i>* = required</i></p>
-          <br />
-          <br />     
-
-          <div style={{width: "500px", margin: "auto"}}>
-          <label>Would you like to opt-in to be randomly matched with other OMSCS students for 15-30 minute calls every 2 weeks? </label>
-          <br />
-          <input type="radio" id="random_yes" name="random" value="random_yes" checked={"random_yes" === this.state.random} onChange={() => this.updateRandomSelection("random_yes")} />
-          <label for="random_yes">Yes</label>
-          <br />
-          <input type="radio" id="random_no" name="random" value="random_no" checked={"random_no" === this.state.random} onChange={() => this.updateRandomSelection("random_no")}/>
-          <label for="random_no">No</label>
-          <br />
+    if (this.state.view === 1){
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
           </div>
+          <h1>OMSCS Coffee Chats</h1>
+          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
           <br />
-
-          <div style={{width: "500px", margin: "auto"}}>
-          <label>Would you like to make your profile information available to other OMSCS students so they request a coffee chat with you? You will have the option to decline individual calls. </label>
           <br />
-          <input type="radio" id="contact_yes" name="contact" value="contact_yes" checked={"contact_yes" === this.state.contact} onChange={() => this.updateContactSelection("contact_yes")} />
-          <label for="contact_yes">Yes</label>
+          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
           <br />
-          <input type="radio" id="contact_no" name="contact" value="contact_no" checked={"contact_no" === this.state.contact} onChange={() => this.updateContactSelection("contact_no")} />
-          <label for="contact_no">No</label>
           <br />
-          </div>
-          <br />
-
-  	      <button type="button" onClick={() => this.updateProfile(
-              document.getElementById('name').value, 
-              document.getElementById('email').value,
-              document.getElementById('city').value,
-              document.getElementById('state').value,
-              document.getElementById('country').value,
-              document.getElementById('current_courses').value,
-              document.getElementById('job_title').value,
-              document.getElementById('company').value,
-              document.getElementById('interests').value,
-              document.querySelector('input[name="random"]:checked') ? document.querySelector('input[name="random"]:checked').value : null,
-              document.querySelector('input[name="contact"]:checked') ? document.querySelector('input[name="contact"]:checked').value : null
-            )}>Submit</button>
-  	    </form>
-  	    <br />
-  	    <br />
-  	    <div style={{width: "500px", margin: "auto"}}><i>
-  	      This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information.
-  	    </i></div>
+          <p>Welcome to the OMSCS Coffee Chat platform.</p>
         </div>
-      </div>
-    );
+      );
+    }
+    else if (this.state.view === 2){
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
+          </div>
+          <h1>Edit Profile</h1>
+          <a href="#" onClick={() => this.loadHome()}>Home</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
+          <br />
+          <br />
+          <div style={{ margin: "auto"}}>
+          <form>
+            <label>Name*:  </label>
+            <input type="text" id="name" placeholder={this.state.name}/>
+            <br />
+            <br />
+            <label>Email*:  </label>
+            <input type="text" id="email" placeholder={this.state.email}/>
+            <br />
+            <br />
+            <label>City:  </label>
+            <input type="text" id="city" placeholder={this.state.city}/>
+            <br />
+            <br />  
+            <label>State:  </label>
+            <input type="text" id="state" placeholder={this.state.state}/>
+            <br />
+            <br />    
+            <label>Country:  </label>
+            <input type="text" id="country" placeholder={this.state.country}/>
+            <br />
+            <br />    
+            <label>Current Courses:  </label>
+            <input type="text" id="current_courses" placeholder={this.state.current_courses}/>
+            <div><i>List the course numbers as comma-separated values. For example: "CS 6460, CS 7637"</i></div>
+            <br />   
+            <label>Job Title:  </label>
+            <input type="text" id="job_title" placeholder={this.state.job_title}/>
+            <br />
+            <br />    
+            <label>Company:  </label>
+            <input type="text" id="company" placeholder={this.state.company}/>
+            <br />
+            <br />           
+            <label>Interests:  </label>
+            <input type="text" id="interests" placeholder={this.state.interests}/>
+            <div><i>List your interests as comma-separated values.</i></div>
+            <p><i>* = required</i></p>
+            <br />
+            <br />     
+
+            <div style={{width: "500px", margin: "auto"}}>
+            <label>Would you like to opt-in to be randomly matched with other OMSCS students for 15-30 minute calls every 2 weeks? </label>
+            <br />
+            <input type="radio" id="random_yes" name="random" value="random_yes" checked={"random_yes" === this.state.random} onChange={() => this.updateRandomSelection("random_yes")} />
+            <label for="random_yes">Yes</label>
+            <br />
+            <input type="radio" id="random_no" name="random" value="random_no" checked={"random_no" === this.state.random} onChange={() => this.updateRandomSelection("random_no")}/>
+            <label for="random_no">No</label>
+            <br />
+            </div>
+            <br />
+
+            <div style={{width: "500px", margin: "auto"}}>
+            <label>Would you like to make your profile information available to other OMSCS students so they request a coffee chat with you? You will have the option to decline individual calls. </label>
+            <br />
+            <input type="radio" id="contact_yes" name="contact" value="contact_yes" checked={"contact_yes" === this.state.contact} onChange={() => this.updateContactSelection("contact_yes")} />
+            <label for="contact_yes">Yes</label>
+            <br />
+            <input type="radio" id="contact_no" name="contact" value="contact_no" checked={"contact_no" === this.state.contact} onChange={() => this.updateContactSelection("contact_no")} />
+            <label for="contact_no">No</label>
+            <br />
+            </div>
+            <br />
+
+            <button type="button" onClick={() => this.updateProfile(
+                document.getElementById('name').value, 
+                document.getElementById('email').value,
+                document.getElementById('city').value,
+                document.getElementById('state').value,
+                document.getElementById('country').value,
+                document.getElementById('current_courses').value,
+                document.getElementById('job_title').value,
+                document.getElementById('company').value,
+                document.getElementById('interests').value,
+                document.querySelector('input[name="random"]:checked') ? document.querySelector('input[name="random"]:checked').value : null,
+                document.querySelector('input[name="contact"]:checked') ? document.querySelector('input[name="contact"]:checked').value : null
+              )}>Submit</button>
+          </form>
+          <br />
+          <br />
+          <div style={{width: "500px", margin: "auto"}}><i>
+            This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information.
+          </i></div>
+          </div>
+        </div>
+      );
+    }
+    else{
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
+          </div>
+          <h1>Random Match</h1>
+          <a href="#" onClick={() => this.loadHome()}>Home</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <p>Your random match is:</p>
+        </div>
+      );
+    }
   }
 
 }
