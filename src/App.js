@@ -35,12 +35,49 @@ class App extends React.Component {
             interests : data.Item.Interests,
             random : data.Item.Random,
             contact : data.Item.Contact,
+            match : data.Item.Match,
+            prev_matches : data.Item.PreviousMatches
           });
+        })
+        .then(() => {
+          this.fetchMatchProfile(this.state.match);
         })
         .catch((error) => console.log('Error while fetching:', error));
 
       }); 
     });
+  }
+
+  async fetchMatchProfile(uid_in){
+    if (uid_in == null || uid_in == ""){
+      return;
+    }
+    var url = "https://7t8g3nj639.execute-api.us-east-2.amazonaws.com/dev?uid=".concat(uid_in);
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        "Access-Control-Allow-Credentials" : true ,
+        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+      },
+      redirect: 'follow'
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({ 
+        match_name : data.Item.Name,
+        match_email: data.Item.Email, 
+        match_city : data.Item.City,
+        match_state : data.Item.State,
+        match_country : data.Item.Country,
+        match_current_courses : data.Item.CurrentCourses,
+        match_job_title : data.Item.JobTitle,
+        match_company : data.Item.Company,
+        match_interests : data.Item.Interests
+      });
+    })
+    .catch((error) => console.log('Error while fetching:', error));
   }
 
   async updateProfile(name_in, email_in, city_in, state_in, country_in, 
@@ -91,6 +128,8 @@ class App extends React.Component {
     if (contact == null || contact === ""){
       contact = this.state.contact;
     }
+    var match = this.state.match;
+    var prev_matches = this.state.prev_matches;
     Auth.currentUserInfo().then(val => {
 	    var raw = JSON.stringify({
 	      "uid":val.username,
@@ -104,7 +143,9 @@ class App extends React.Component {
         "company":company,
         "interests":interests,
         "random": random,
-        "contact": contact
+        "contact": contact,
+        "match": match,
+        "prev_matches": prev_matches
 	    });
 	    var requestOptions = {
 	      method: 'POST',
@@ -154,7 +195,18 @@ class App extends React.Component {
       interests : null,
       random: null,
       contact: null,
-      view: 1
+      view: 1,
+      match: null,
+      prev_matches: null,
+      match_name : null,
+      match_email: null, 
+      match_city : null,
+      match_state : null,
+      match_country : null,
+      match_current_courses : null,
+      match_job_title : null,
+      match_company : null,
+      match_interests : null
     };
   }
 
@@ -294,7 +346,20 @@ class App extends React.Component {
           <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
           <br />
           <br />
-          <p>Your random match is:</p>
+          <p>Your random match is: {this.state.match_name}.</p>
+          <p>They can be reached at {this.state.match_email}.</p>
+          <p>Some more information about them is:</p>
+          <i>
+          <p>City: {this.state.match_city}</p>
+          <p>State: {this.state.match_state}</p>
+          <p>Country: {this.state.match_country}</p>
+          <p>Current Courses: {this.state.match_current_courses}</p>
+          <p>Job Title: {this.state.match_job_title}</p>
+          <p>Company: {this.state.match_company}</p>
+          <p>Interests: {this.state.match_interests}</p>
+          </i>
+          <br />
+          <p>This match was assigned on 04/04/2021. </p>
         </div>
       );
     }
