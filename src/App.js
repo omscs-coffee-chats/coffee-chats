@@ -82,6 +82,7 @@ class App extends React.Component {
 
   async updateProfile(name_in, email_in, city_in, state_in, country_in, 
     current_courses_in, job_title_in, company_in, interests_in, random_in, contact_in) {
+    console.log(random_in);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var name = name_in;
@@ -333,6 +334,41 @@ class App extends React.Component {
         </div>
       );
     }
+    else if (this.state.view === 3 && this.state.random === "random_no"){
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
+          </div>
+          <h1>Random Match</h1>
+          <a href="#" onClick={() => this.loadHome()}>Home</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <p>You are not currently opted-in to be randomly matched with another student. To opt-in, please edit your preferences in your profile.</p>
+        </div>
+      );
+    }
+    else if (this.state.view === 3 && (this.state.match === "" || this.state.match == null)){
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
+          </div>
+          <h1>Random Match</h1>
+          <a href="#" onClick={() => this.loadHome()}>Home</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <p>You are not matched with anyone for this round of matches. This could happen if you opted-in to be matched after the most recent round of matches, or if we were unable to match you with someone new.</p>
+          <p>The most recent round of matches was done on 04/04/2021. Please check back 2 weeks from this date to see your new match.</p>
+        </div>
+      );
+    }    
     else{
       return (
         <div className="App">
