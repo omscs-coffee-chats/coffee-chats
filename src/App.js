@@ -42,8 +42,10 @@ class App extends React.Component {
         .then(() => {
           this.fetchMatchProfile(this.state.match);
         })
+        .then(() => {
+          this.fetchContactProfiles();
+        })
         .catch((error) => console.log('Error while fetching:', error));
-
       }); 
     });
   }
@@ -80,9 +82,53 @@ class App extends React.Component {
     .catch((error) => console.log('Error while fetching:', error));
   }
 
+  replaceEmptyField(field){
+    if (field == null || field === ""){
+      return "Not Specified";
+    }
+    return field;
+  }
+
+  processContacts(contacts) {
+    var contacts = JSON.parse(contacts);
+    var processed_contacts = [];
+    for(let contact of contacts){
+      var contact_details = {};
+      contact_details['Name'] = this.replaceEmptyField(contact['Name']);
+      contact_details['Email'] = this.replaceEmptyField(contact['Email']);
+      contact_details['City'] = this.replaceEmptyField(contact['City']);
+      contact_details['State'] = this.replaceEmptyField(contact['State']);
+      contact_details['Country'] = this.replaceEmptyField(contact['Country']);
+      contact_details['JobTitle'] = this.replaceEmptyField(contact['JobTitle']);
+      contact_details['Company'] = this.replaceEmptyField(contact['Company']);
+      contact_details['CurrentCourses'] = this.replaceEmptyField(contact['CurrentCourses']);
+      contact_details['Interests'] = this.replaceEmptyField(contact['Interests']);
+      processed_contacts.push(contact_details);
+    }
+    return processed_contacts;
+  }
+
+  async fetchContactProfiles(){
+    var url = "https://5enxks0jjh.execute-api.us-east-2.amazonaws.com/dev/";
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow'
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      var processed_contacts = this.processContacts(data.body);
+      this.setState({ 
+        contacts : processed_contacts
+      });
+    })
+    .catch((error) => console.log('Error while fetching:', error));
+  }
+
   async updateProfile(name_in, email_in, city_in, state_in, country_in, 
     current_courses_in, job_title_in, company_in, interests_in, random_in, contact_in) {
-    console.log(random_in);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var name = name_in;
@@ -172,6 +218,10 @@ class App extends React.Component {
     this.setState({view: 3});
   }
 
+  loadContacts() {
+    this.setState({view: 4});
+  }
+
   updateRandomSelection(selection_in) {
     this.setState({random: selection_in});
   }
@@ -207,7 +257,8 @@ class App extends React.Component {
       match_current_courses : null,
       match_job_title : null,
       match_company : null,
-      match_interests : null
+      match_interests : null,
+      contacts : null
     };
   }
 
@@ -229,7 +280,30 @@ class App extends React.Component {
           <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
           <br />
           <br />
+          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
+          <br />
+          <br />
           <p>Welcome to the OMSCS Coffee Chat platform.</p>
+        </div>
+      );
+    }
+    else if (this.state.view === 4){
+      return (
+        <div className="App">
+          <div style={{width: "50px"}}>
+            <AmplifySignOut />
+          </div>
+          <h1>All Students</h1>
+          <a href="#" onClick={() => this.loadHome()}>Home</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
+          <br />
+          <br />
+          <p>{JSON.stringify(this.state.contacts)}</p>
         </div>
       );
     }
@@ -244,6 +318,9 @@ class App extends React.Component {
           <br />
           <br />
           <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
           <br />
           <br />
           <div style={{ margin: "auto"}}>
@@ -347,6 +424,9 @@ class App extends React.Component {
           <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
           <br />
           <br />
+          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
+          <br />
+          <br />
           <p>You are not currently opted-in to be randomly matched with another student. To opt-in, please edit your preferences in your profile.</p>
         </div>
       );
@@ -362,6 +442,9 @@ class App extends React.Component {
           <br />
           <br />
           <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
           <br />
           <br />
           <p>You are not matched with anyone for this round of matches. This could happen if you opted-in to be matched after the most recent round of matches, or if we were unable to match you with someone new.</p>
@@ -380,6 +463,9 @@ class App extends React.Component {
           <br />
           <br />
           <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
+          <br />
+          <br />
+          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
           <br />
           <br />
           <p>Your random match is: {this.state.match_name}.</p>
