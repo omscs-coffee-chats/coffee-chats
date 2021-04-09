@@ -42,9 +42,6 @@ class App extends React.Component {
         .then(() => {
           this.fetchMatchProfile(this.state.match);
         })
-        .then(() => {
-          this.fetchContactProfiles();
-        })
         .catch((error) => console.log('Error while fetching:', error));
       }); 
     });
@@ -55,7 +52,7 @@ class App extends React.Component {
       return;
     }
     var url = "https://7t8g3nj639.execute-api.us-east-2.amazonaws.com/dev?uid=".concat(uid_in);
-    fetch(url, {
+    await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +107,7 @@ class App extends React.Component {
 
   async fetchContactProfiles(){
     var url = "https://5enxks0jjh.execute-api.us-east-2.amazonaws.com/dev/";
-    fetch(url, {
+    await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -230,6 +227,45 @@ class App extends React.Component {
     this.setState({contact: selection_in});
   }
 
+  // Logic derived from https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg
+  renderTableHeader() {
+    let titles = {
+      "Name" : "Name", 
+      "Email" : "Email", 
+      "City" : "City", 
+      "State" : "State", 
+      "Country" : "Country", 
+      "JobTitle" : "Job Title", 
+      "Company" : "Company", 
+      "CurrentCourses" : "Current Courses", 
+      "Interests" : "Interests"
+    };
+    let header = Object.keys(this.state.contacts[0]);
+    return header.map((key, index) => {
+      return <th key={index}>{titles[key]}</th>
+    });
+  }
+
+  // Logic derived from https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg
+  renderTableData() {
+    return this.state.contacts.map((student, index) => {
+      const { Name, Email, City, State, Country, JobTitle, Company, CurrentCourses, Interests } = student; 
+      return (
+        <tr>
+          <td>{Name}</td>
+          <td>{Email}</td>
+          <td>{City}</td>
+          <td>{State}</td>
+          <td>{Country}</td>
+          <td>{JobTitle}</td>
+          <td>{Company}</td>
+          <td>{CurrentCourses}</td>
+          <td>{Interests}</td>
+        </tr>
+      );
+    });
+   }
+
   constructor(props) {
     super(props);
 
@@ -263,6 +299,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchContactProfiles();
     this.fetchProfile();
   }
 
@@ -303,7 +340,14 @@ class App extends React.Component {
           <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
           <br />
           <br />
-          <p>{JSON.stringify(this.state.contacts)}</p>
+          <br />
+          <br />
+          <table id='students'>
+            <tbody>
+              <tr>{this.renderTableHeader()}</tr>
+              {this.renderTableData()}
+            </tbody>
+          </table>
         </div>
       );
     }
