@@ -340,7 +340,8 @@ class App extends React.Component {
           <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
           <br />
           <br />
-          <br />
+          <p>The students listed in this table have opted-in to being contacted about scheduling a coffee chat. To schedule a coffee chat with them, reach out via their provided email. </p>
+          <p>Note that students may still decline specific coffee chat requests based on availability.</p>
           <br />
           <table id='students'>
             <tbody>
