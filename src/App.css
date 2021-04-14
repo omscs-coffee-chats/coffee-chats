@@ -46,3 +46,40 @@ table, th, td {
   border-collapse: collapse;
   width: 100%;
 }
+
+.header {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 30px;
+  background-color: #cdb7f6;
+}
+
+.profileForm{
+  text-align: left;
+  margin-left: 25px;
+}
+
+.profileSmallText{
+  font-size: 12px;
+}
+
+.profileRadioButtonSection{
+  text-align: left;
+}
+
+.profileSubmitButton{
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.randomMatchDetails{
+  text-align: left;
+  margin-left: 25px;
+}
+
+.randomMatchSubDetails{
+  text-align: left;
+  margin-left: 50px;
+}

@@ -307,40 +307,38 @@ class App extends React.Component {
     if (this.state.view === 1){
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
-          </div>
-          <h1>OMSCS Coffee Chats</h1>
-          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
-          <br />
-          <br />
-          <p>Welcome to the OMSCS Coffee Chat platform.</p>
+          <div class="header">OMSCS Coffee Chats</div>
+          <table style={{width: "100%"}}>
+            <tbody>
+              <tr>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}><b>Home</b></a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}>Random Match</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}>Request A Call</a></td>
+                <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Welcome to the OMSCS Coffee Chat platform.</h3>
         </div>
       );
     }
     else if (this.state.view === 4){
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
-          </div>
-          <h1>All Students</h1>
-          <a href="#" onClick={() => this.loadHome()}>Home</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
-          <br />
-          <br />
-          <p>The students listed in this table have opted-in to being contacted about scheduling a coffee chat. To schedule a coffee chat with them, reach out via their provided email. </p>
+          <div class="header">OMSCS Coffee Chats</div>
+          <table style={{width: "100%"}}>
+            <tbody>
+              <tr>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}>Home</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}>Random Match</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}><b>Request A Call</b></a></td>
+                <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>The students listed in this table have opted-in to being contacted about scheduling a coffee chat. To schedule a coffee chat with them, reach out via their provided email and include 'OMSCS Coffee Chat Request' in the subject line. </p>
           <p>Note that students may still decline specific coffee chat requests based on availability.</p>
           <br />
           <table id='students'>
@@ -355,61 +353,59 @@ class App extends React.Component {
     else if (this.state.view === 2){
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
-          </div>
-          <h1>Edit Profile</h1>
-          <a href="#" onClick={() => this.loadHome()}>Home</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadMatch()}>Random Match</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
-          <br />
-          <br />
-          <div style={{ margin: "auto"}}>
-          <form>
-            <label>Name*:  </label>
-            <input type="text" id="name" placeholder={this.state.name}/>
+          <div class="header">OMSCS Coffee Chats</div>
+          <table style={{width: "100%"}}>
+            <tbody>
+              <tr>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}>Home</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}><b>Edit Profile</b></a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}>Random Match</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}>Request A Call</a></td>
+                <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style={{margin: "20px"}}>This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information.</p>
+          <div>
+          <form class="profileForm">
+            <label>Name (required):  </label>
+            <input type="text" id="name" size="50" placeholder={this.state.name}/>
             <br />
             <br />
-            <label>Email*:  </label>
-            <input type="text" id="email" placeholder={this.state.email}/>
+            <label>Email (required):  </label>
+            <input type="text" id="email" size="50" placeholder={this.state.email}/>
             <br />
             <br />
-            <label>City:  </label>
-            <input type="text" id="city" placeholder={this.state.city}/>
+            <label>City:       </label>
+            <input type="text" id="city" size="50" placeholder={this.state.city}/>
             <br />
             <br />  
             <label>State:  </label>
-            <input type="text" id="state" placeholder={this.state.state}/>
+            <input type="text" id="state" size="50" placeholder={this.state.state}/>
             <br />
             <br />    
             <label>Country:  </label>
-            <input type="text" id="country" placeholder={this.state.country}/>
+            <input type="text" id="country" size="50" placeholder={this.state.country}/>
             <br />
             <br />    
             <label>Current Courses:  </label>
-            <input type="text" id="current_courses" placeholder={this.state.current_courses}/>
-            <div><i>List the course numbers as comma-separated values. For example: "CS 6460, CS 7637"</i></div>
+            <input type="text" id="current_courses" size="50" placeholder={this.state.current_courses}/>
+            <div class="profileSmallText"><i>List the course numbers as comma-separated values. For example: "CS 6460, CS 7637"</i></div>
             <br />   
             <label>Job Title:  </label>
-            <input type="text" id="job_title" placeholder={this.state.job_title}/>
+            <input type="text" id="job_title" size="50" placeholder={this.state.job_title}/>
             <br />
             <br />    
             <label>Company:  </label>
-            <input type="text" id="company" placeholder={this.state.company}/>
+            <input type="text" id="company" size="50" placeholder={this.state.company}/>
             <br />
             <br />           
             <label>Interests:  </label>
-            <input type="text" id="interests" placeholder={this.state.interests}/>
-            <div><i>List your interests as comma-separated values.</i></div>
-            <p><i>* = required</i></p>
-            <br />
-            <br />     
+            <input type="text" id="interests" size="50" placeholder={this.state.interests}/>
+            <div class="profileSmallText"><i>List your interests as comma-separated values.</i></div>
+            <br />   
 
-            <div style={{width: "500px", margin: "auto"}}>
+            <div class="profileRadioButtonSection" style={{width: "500px"}}>
             <label>Would you like to opt-in to be randomly matched with other OMSCS students for 15-30 minute calls every 2 weeks? </label>
             <br />
             <input type="radio" id="random_yes" name="random" value="random_yes" checked={"random_yes" === this.state.random} onChange={() => this.updateRandomSelection("random_yes")} />
@@ -421,7 +417,7 @@ class App extends React.Component {
             </div>
             <br />
 
-            <div style={{width: "500px", margin: "auto"}}>
+            <div class="profileRadioButtonSection" style={{width: "500px"}}>
             <label>Would you like to make your profile information available to other OMSCS students so they request a coffee chat with you? You will have the option to decline individual calls. </label>
             <br />
             <input type="radio" id="contact_yes" name="contact" value="contact_yes" checked={"contact_yes" === this.state.contact} onChange={() => this.updateContactSelection("contact_yes")} />
@@ -433,7 +429,7 @@ class App extends React.Component {
             </div>
             <br />
 
-            <button type="button" onClick={() => this.updateProfile(
+            <button class="profileSubmitButton" type="button" onClick={() => this.updateProfile(
                 document.getElementById('name').value, 
                 document.getElementById('email').value,
                 document.getElementById('city').value,
@@ -447,11 +443,6 @@ class App extends React.Component {
                 document.querySelector('input[name="contact"]:checked') ? document.querySelector('input[name="contact"]:checked').value : null
               )}>Submit</button>
           </form>
-          <br />
-          <br />
-          <div style={{width: "500px", margin: "auto"}}><i>
-            This information will only be used for the purpose of scheduling coffee chats. If you opt-in to being randomly patched with another student, this information will be shared with the student you are matched with. If you opt-in to allow other students to request a coffee chat with you, this information will be viewable by other OMSCS students. You can choose to opt-out at any time or edit/remove your information.
-          </i></div>
           </div>
         </div>
       );
@@ -459,19 +450,18 @@ class App extends React.Component {
     else if (this.state.view === 3 && this.state.random === "random_no"){
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
-          </div>
-          <h1>Random Match</h1>
-          <a href="#" onClick={() => this.loadHome()}>Home</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
-          <br />
-          <br />
+          <div class="header">OMSCS Coffee Chats</div>
+          <table style={{width: "100%"}}>
+            <tbody>
+              <tr>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}>Home</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}><b>Random Match</b></a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}>Request A Call</a></td>
+                <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+              </tr>
+            </tbody>
+          </table>
           <p>You are not currently opted-in to be randomly matched with another student. To opt-in, please edit your preferences in your profile.</p>
         </div>
       );
@@ -479,19 +469,18 @@ class App extends React.Component {
     else if (this.state.view === 3 && (this.state.match === "" || this.state.match == null)){
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
-          </div>
-          <h1>Random Match</h1>
-          <a href="#" onClick={() => this.loadHome()}>Home</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
-          <br />
-          <br />
+          <div class="header">OMSCS Coffee Chats</div>
+          <table style={{width: "100%"}}>
+            <tbody>
+              <tr>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}>Home</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}><b>Random Match</b></a></td>
+                <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}>Request A Call</a></td>
+                <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+              </tr>
+            </tbody>
+          </table>
           <p>You are not matched with anyone for this round of matches. This could happen if you opted-in to be matched after the most recent round of matches, or if we were unable to match you with someone new.</p>
           <p>The most recent round of matches was done on 04/04/2021. Please check back 2 weeks from this date to see your new match.</p>
         </div>
@@ -500,33 +489,36 @@ class App extends React.Component {
     else{
       return (
         <div className="App">
-          <div style={{width: "50px"}}>
-            <AmplifySignOut />
+          <div class="header">OMSCS Coffee Chats</div>
+            <table style={{width: "100%"}}>
+              <tbody>
+                <tr>
+                  <td style={{width: "20%"}}><a href="#" onClick={() => this.loadHome()}>Home</a></td>
+                  <td style={{width: "20%"}}><a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a></td>
+                  <td style={{width: "20%"}}><a href="#" onClick={() => this.loadMatch()}><b>Random Match</b></a></td>
+                  <td style={{width: "20%"}}><a href="#" onClick={() => this.loadContacts()}>Request A Call</a></td>
+                  <td style={{width: "20%"}}><AmplifySignOut style={{ '--amplify-primary-color': '#f0f0f0', '--amplify-primary-contrast': '#551a8b' }} /></td>
+                </tr>
+              </tbody>
+            </table>
+          <div class="randomMatchDetails">
+            <p>Your random match is: <b>{this.state.match_name}</b></p>
+            <p>They can be reached at: <b>{this.state.match_email}</b></p>
+            <p>Some more information about them is:</p>
+            <i>
+              <div class="randomMatchSubDetails">
+                <p>City: {this.state.match_city}</p>
+                <p>State: {this.state.match_state}</p>
+                <p>Country: {this.state.match_country}</p>
+                <p>Current Courses: {this.state.match_current_courses}</p>
+                <p>Job Title: {this.state.match_job_title}</p>
+                <p>Company: {this.state.match_company}</p>
+                <p>Interests: {this.state.match_interests}</p>
+              </div>
+            </i>
+            <br />
+            <p>This match was assigned on 04/12/2021. </p>
           </div>
-          <h1>Random Match</h1>
-          <a href="#" onClick={() => this.loadHome()}>Home</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadEditProfile()}>Edit Profile</a>
-          <br />
-          <br />
-          <a href="#" onClick={() => this.loadContacts()}>All Students</a>
-          <br />
-          <br />
-          <p>Your random match is: {this.state.match_name}.</p>
-          <p>They can be reached at {this.state.match_email}.</p>
-          <p>Some more information about them is:</p>
-          <i>
-          <p>City: {this.state.match_city}</p>
-          <p>State: {this.state.match_state}</p>
-          <p>Country: {this.state.match_country}</p>
-          <p>Current Courses: {this.state.match_current_courses}</p>
-          <p>Job Title: {this.state.match_job_title}</p>
-          <p>Company: {this.state.match_company}</p>
-          <p>Interests: {this.state.match_interests}</p>
-          </i>
-          <br />
-          <p>This match was assigned on 04/04/2021. </p>
         </div>
       );
     }
