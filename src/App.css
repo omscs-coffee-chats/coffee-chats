@@ -56,7 +56,6 @@ table, th, td {
 }
 
 .profileForm{
-  text-align: left;
   margin-left: 25px;
 }
 
@@ -65,7 +64,7 @@ table, th, td {
 }
 
 .profileRadioButtonSection{
-  text-align: left;
+  margin: auto;
 }
 
 .profileSubmitButton{
@@ -82,4 +81,13 @@ table, th, td {
 .randomMatchSubDetails{
   text-align: left;
   margin-left: 50px;
+}
+
+.welcomeMessage{
+  font-size: 22px;
+}
+
+.welcomeSubMessage{
+  width: 1000px;
+  margin: auto;
 }

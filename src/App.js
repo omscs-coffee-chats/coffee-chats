@@ -319,7 +319,13 @@ class App extends React.Component {
               </tr>
             </tbody>
           </table>
-          <h3>Welcome to the OMSCS Coffee Chat platform.</h3>
+          <p class="welcomeMessage">Welcome to the OMSCS Coffee Chats platform!</p>
+          <br />
+          <p class="welcomeSubMessage">If you would would like to edit your profile information, opt-in to be randomly matched on a bi-weekly basis with another OMSCS student or opt-in to be contacted by another student about scheduling a coffee chat, visit the 'Edit Profile' page.</p>
+          <br />
+          <p class="welcomeSubMessage">If you would like to view your random match, visit the 'Random Match' page. If you are not opted-in to be randomly matched, you will not have a match. If you have recently opted-in, it may take up to two weeks to be matched, as matches are generated bi-weekly.</p>
+          <br />
+          <p class="welcomeSubMessage">If you would like to view all students who have opted-in to be reached out to about scheduling a coffee chat, visit the 'Request A Chat' page.</p>
         </div>
       );
     }
